@@ -110,7 +110,7 @@ class _CardBackground extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 5 , sigmaY: 5 ),
+          filter: ImageFilter.blur(sigmaX: 10 , sigmaY: 10 ),
           child: Container(
             height: 180,
             decoration: BoxDecoration(
@@ -142,10 +142,24 @@ class _CardStructure extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        CircleAvatar(
-          backgroundColor: color,
-          radius: 30,
-          child: Icon( icon, size: 35, color: Colors.white,),
+        Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              colors: [
+                HSLColor.fromColor(color).withLightness(.7).toColor(),
+                color,
+              ],
+              stops: const [.1 , .9],
+              begin: AlignmentDirectional.topStart,
+              end: AlignmentDirectional.bottomEnd
+            )
+          ),
+          child: CircleAvatar(
+            backgroundColor: Colors.transparent,
+            radius: 30,
+            child: Icon( icon, size: 35, color: Colors.white,),
+          ),
         ),
         const SizedBox(height: 15),
         Text(
